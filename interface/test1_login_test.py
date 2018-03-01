@@ -9,6 +9,7 @@ from ddt import ddt,data,unpack
 # import pprint
 
 filepath = r'E:\python_lianxi\webinterface\YNCtestinterface\test_data\test1_login_test_data.xlsx'
+
 AllData = base.get_data(filepath,'test1')
 TestData = base.get_data(filepath,'test1')[1:]
 
