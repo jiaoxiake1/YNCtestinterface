@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a03b76ad-ded8-4e17-814d-01e7aa471bfa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/test1_login_test.py" afterPath="$PROJECT_DIR$/interface/test1_login_test.py" />
     </list>
@@ -59,11 +60,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test1_login_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test1_login_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interface/test1_login_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="262">
+              <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -175,7 +186,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/run_test.py" />
         <option value="$PROJECT_DIR$/interface/set_Account_test.py" />
         <option value="$PROJECT_DIR$/interface/setAccount_test.py" />
         <option value="$PROJECT_DIR$/interface/login_test.py" />
@@ -226,6 +236,7 @@
         <option value="$PROJECT_DIR$/test_data/mock_data/get_params_test_mock.py" />
         <option value="$PROJECT_DIR$/interface/test1_4_login_test.py" />
         <option value="$PROJECT_DIR$/interface/test1_login_test.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -236,8 +247,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="457" />
-    <option name="y" value="24" />
+    <option name="x" value="1008" />
+    <option name="y" value="80" />
     <option name="width" value="1590" />
     <option name="height" value="931" />
   </component>
@@ -263,16 +274,6 @@
             <path>
               <item name="YNCtestinterface" type="b2602c69:ProjectViewProjectNode" />
               <item name="YNCtestinterface" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="YNCtestinterface" type="b2602c69:ProjectViewProjectNode" />
-              <item name="YNCtestinterface" type="462c0819:PsiDirectoryNode" />
-              <item name="driver" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="YNCtestinterface" type="b2602c69:ProjectViewProjectNode" />
-              <item name="YNCtestinterface" type="462c0819:PsiDirectoryNode" />
-              <item name="interface" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="YNCtestinterface" type="b2602c69:ProjectViewProjectNode" />
@@ -497,7 +498,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="457" y="24" width="1590" height="931" extended-state="0" />
+    <frame x="1008" y="80" width="1590" height="931" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27254903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -548,14 +549,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cnntest/qq.js" />
-    <entry file="file://$PROJECT_DIR$/cnntest/cookies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interface/test58_uploadUserHeadIconBinary_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1113">
@@ -708,7 +701,7 @@
         <state relative-caret-position="1350">
           <caret line="53" column="40" lean-forward="false" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
           <folding>
-            <element signature="e#22#37#0" expanded="true" />
+            <element signature="e#22#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -863,10 +856,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/report/2018-03-01 15_47_25result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interface/test1_login_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="262">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
