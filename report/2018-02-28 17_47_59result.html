@@ -1,0 +1,2682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Yuneec UC server interface test</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         {  }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+	margin-left: 10px;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+	margin-left: 10px;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+	margin-left: 10px;
+}
+#header_row {
+    font-weight: bold;
+    color: #606060;
+    background-color: #f5f5f5;
+	border-top-width: 10px;
+    border-color: #d6e9c6;
+}
+#result_table td {
+    border: 1px solid #f5f5f5;
+    padding: 2px;
+
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #d6e9c6; }
+.failClass  { background-color: #faebcc; }
+.errorClass { background-color: #ebccd1; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>Yuneec UC server interface test</h1>
+<p class='attribute'><strong>Start Time:</strong> 2018-02-28 17:47:59</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:04.046223</p>
+<p class='attribute'><strong>Status:</strong> Pass 61 Failure 9 Error 18</p>
+
+<p class='description'>yuneec server interface test</p>
+</div>
+
+
+
+<p id='show_detail_line' style="margin-left: 10px;">Show
+<a href='javascript:showCase(0)' class="btn btn-xs btn-primary">Summary</a>
+<a href='javascript:showCase(1)' class="btn btn-xs btn-danger">Failed</a>
+<a href='javascript:showCase(2)' class="btn btn-xs btn-info">All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="panel-title">
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>test18_sendFeedback_test.sendFeedbacktest: 发送用户返回</td>
+    <td>16</td>
+    <td>0</td>
+    <td>0</td>
+    <td>16</td>
+    <td><a href="javascript:showClassDetail('c1',16)">Detail</a></td>
+</tr>
+
+<tr id='ft1.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_contactERROR: contact  为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
+        error</a>
+
+    <div id='div_ft1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.1: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 80, in test_sendFeedback_contactERROR
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_contactERROR: contact  为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.2')" >
+        error</a>
+
+    <div id='div_ft1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.2: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_detailERROR: detail 空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.3')" >
+        error</a>
+
+    <div id='div_ft1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.3: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 54, in test_sendFeedback_detailERROR
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_detailERROR: detail 空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.4')" >
+        error</a>
+
+    <div id='div_ft1.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.4: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_productNameERROR1: productName 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.5')" >
+        error</a>
+
+    <div id='div_ft1.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.5: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 63, in test_sendFeedback_productNameERROR1
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_productNameERROR1: productName 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.6')" >
+        error</a>
+
+    <div id='div_ft1.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.6: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_productNameERROR2: productName 输入错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.7')" >
+        error</a>
+
+    <div id='div_ft1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.7: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 72, in test_sendFeedback_productNameERROR2
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_productNameERROR2: productName 输入错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.8')" >
+        error</a>
+
+    <div id='div_ft1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.8: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_success1: firebird 符合规范输入</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.9')" >
+        error</a>
+
+    <div id='div_ft1.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.9: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 20, in test_sendFeedback_success1
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url, payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_success1: firebird 符合规范输入</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.10')" >
+        error</a>
+
+    <div id='div_ft1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.10: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_success2: breeze 符合规范输入,username 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.11')" >
+        error</a>
+
+    <div id='div_ft1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.11: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 28, in test_sendFeedback_success2
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_success2: breeze 符合规范输入,username 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.12')" >
+        error</a>
+
+    <div id='div_ft1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.12: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_usernameERROR1: username 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.13')" >
+        error</a>
+
+    <div id='div_ft1.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.13: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 37, in test_sendFeedback_usernameERROR1
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_usernameERROR1: username 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.14')" >
+        error</a>
+
+    <div id='div_ft1.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.14: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_usernameERROR2: username 格式错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.15')" >
+        error</a>
+
+    <div id='div_ft1.15' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.15: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test18_sendFeedback_test.py", line 45, in test_sendFeedback_usernameERROR2
+    self.result = base.Page.baseResquest(self,sendFeedbacktest.base_url,payload)
+AttributeError: module 'driver.base' has no attribute 'Page'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_sendFeedback_usernameERROR2: username 格式错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.16')" >
+        error</a>
+
+    <div id='div_ft1.16' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.16').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.16: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'sendFeedbacktest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test1_login_test.loginTest: 用户登录测试</td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',4)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_AccoutSuccessful_1_____json____username___nn_chen_yuneec_com___password___a1234567890_________code___10000___status___success_______nusername___email_format__npassword__字母数字_下划线__: 用户登录测试</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: http://139.196.43.67:8080/
+{'message': '10000', 'status': 'success', 'data': {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': 'FA62D8E9F3406614263B70355CA5BF45', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_AccoutSuccessful_2_____json____username______password___a1234567890_________code___10002___status___error______username_is_null__: 用户登录测试</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.2')" >
+        pass</a>
+
+    <div id='div_pt2.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.2: http://139.196.43.67:8080/
+{'message': '10002', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_AccoutSuccessful_3_____json____username___eeeee___password___a1234567890_________code___10203___status___error______username_is_error__: 用户登录测试</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.3')" >
+        pass</a>
+
+    <div id='div_pt2.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.3: http://139.196.43.67:8080/
+{'message': '10203', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login_AccoutSuccessful_4_____json____username___nn_chen_yuneec_com___password___7890_________code___10203___status___error______password_is_error__: 用户登录测试</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.4')" >
+        pass</a>
+
+    <div id='div_pt2.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.4: http://139.196.43.67:8080/
+{'message': '10203', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test2_setAccount_test.setAccentTest: 用户注册</td>
+    <td>14</td>
+    <td>14</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',14)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_AccountExist: 该账号已被注册</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: {'message': '10104', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_AccountFormatError1: 用户名格式不正确 不含@</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: {'message': '10105', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_AccountFormatError2: 用户名格式不正确  用户名结尾处加@</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.3')" >
+        pass</a>
+
+    <div id='div_pt3.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.3: {'message': '10105', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_AccountNULL: 账号为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.4')" >
+        pass</a>
+
+    <div id='div_pt3.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.4: {'message': '10002', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError1: 密码不正确 纯数字 小于6位</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.5')" >
+        pass</a>
+
+    <div id='div_pt3.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.5: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError2: 密码不正确 纯数字 大于18位</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.6')" >
+        pass</a>
+
+    <div id='div_pt3.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.6: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError3: 密码不正确 纯字母 小于6</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.7')" >
+        pass</a>
+
+    <div id='div_pt3.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.7: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError4: 密码不正确 纯字母 大于18位</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.8')" >
+        pass</a>
+
+    <div id='div_pt3.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.8: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError5: 密码不正确 纯字母 大于18位</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.9')" >
+        pass</a>
+
+    <div id='div_pt3.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.9: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError6: 密码不正确 特殊字符 小于6位</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.10')" >
+        pass</a>
+
+    <div id='div_pt3.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.10: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError7: 密码不正确 特殊字符 大于16</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.11')" >
+        pass</a>
+
+    <div id='div_pt3.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.11: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError8: 密码不正确 特殊字符 大于18</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.12')" >
+        pass</a>
+
+    <div id='div_pt3.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.12: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordFormatError9: 密码不正确 特殊字符 大于6小于大于18</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.13')" >
+        pass</a>
+
+    <div id='div_pt3.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.13: {'message': '10106', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_setAccount_PasswordNULL: 密码为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.14')" >
+        pass</a>
+
+    <div id='div_pt3.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.14: {'message': '10103', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test32_getUserInfo_test.getUserInfo_test: 客户主动修改密码 </td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',4)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test1_login: 先登录 获取token</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: FA62D8E9F3406614263B70355CA5BF45
+{'message': '10000', 'status': 'success', 'data': {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': 'FA62D8E9F3406614263B70355CA5BF45', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_SUCCESS: 成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.2')" >
+        pass</a>
+
+    <div id='div_pt4.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.2: FA62D8E9F3406614263B70355CA5BF45
+{'message': '10000', 'status': 'success', 'data': {'nickname': 'tt', 'userid': 16086, 'lastname': 'tt', 'RegisterDate': '2017-09-14 16:41:45.0', 'firstname': 'tt', 'city': '', 'userType': '2', 'country': '', 'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'username': 'nn.chen@yuneec.com', 'province': '', 'gender': '1', 'grade': 0, 'Subscribe': 0}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt4.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_tokenERROR1: token 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.3')" >
+        pass</a>
+
+    <div id='div_pt4.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.3: FA62D8E9F3406614263B70355CA5BF45
+{'message': '10003', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_tokenERROR2: token 错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.4')" >
+        pass</a>
+
+    <div id='div_pt4.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.4: FA62D8E9F3406614263B70355CA5BF45
+{'message': '10005', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test3_findPassword_test.findPasswordtest: 用户忘记密码时，重新申请密码</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',3)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_findPassword_AccountNULL: 用户名为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        pass</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: {'message': '10002', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_findPassword_AccountNotExist: 用户名不存在</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.2')" >
+        pass</a>
+
+    <div id='div_pt5.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.2: {'message': '10007', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_findPassword_sendmailSuccessful: 发用验证码邮件成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.3')" >
+        pass</a>
+
+    <div id='div_pt5.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.3: {'message': '10000', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='failClass'>
+    <td>test4_modifyPassword_test.modifyPasswordtest: 客户主动修改密码 </td>
+    <td>18</td>
+    <td>15</td>
+    <td>3</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c6',18)">Detail</a></td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login: 先登录 获取token</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        pass</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': 'FA62D8E9F3406614263B70355CA5BF45', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}
+FA62D8E9F3406614263B70355CA5BF45
+{'message': '10000', 'status': 'success', 'data': {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': 'FA62D8E9F3406614263B70355CA5BF45', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft6.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_modifyPassword_AccountORPasswordError1: 用户名或密码错误  用户名错</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.2')" >
+        fail</a>
+
+    <div id='div_ft6.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft6.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft6.2: {'message': '10406', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test4_modifyPassword_test.py", line 100, in test_modifyPassword_AccountORPasswordError1
+    self.assertEqual(self.result["message"], "10203")
+AssertionError: '10406' != '10203'
+- 10406
++ 10203
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft6.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_modifyPassword_AccountORPasswordError2: 用户名或密码错误 密码错</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.3')" >
+        fail</a>
+
+    <div id='div_ft6.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft6.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft6.3: {'message': '10406', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test4_modifyPassword_test.py", line 112, in test_modifyPassword_AccountORPasswordError2
+    self.assertEqual(self.result["message"], "10203")
+AssertionError: '10406' != '10203'
+- 10406
++ 10203
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft6.4' class='none'>
+    <td class='failCase'><div class='testcase'>test_modifyPassword_AccountORPasswordError3: 用户名或密码错误  用户名密码都错</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.4')" >
+        fail</a>
+
+    <div id='div_ft6.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft6.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft6.4: {'message': '10406', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test4_modifyPassword_test.py", line 124, in test_modifyPassword_AccountORPasswordError3
+    self.assertEqual(self.result["message"], "10203")
+AssertionError: '10406' != '10203'
+- 10406
++ 10203
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_AccountORPasswordError4: 用户名或密码错误  用户名为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.5')" >
+        pass</a>
+
+    <div id='div_pt6.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.5: {'message': '10006', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_AccountORPasswordError5: 用户名或密码错误  密码为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.6')" >
+        pass</a>
+
+    <div id='div_pt6.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.6: {'message': '10006', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError1: 新密码格式不正确 小于6位 全数字</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.7')" >
+        pass</a>
+
+    <div id='div_pt6.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.7: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError2: 新密码格式不正确 大于18位 全数字</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.8')" >
+        pass</a>
+
+    <div id='div_pt6.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.8: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError3: 新密码格式不正确  6-18 全数字</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.9')" >
+        pass</a>
+
+    <div id='div_pt6.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.9: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError4: 新密码格式不正确  6-18 全字母</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.10')" >
+        pass</a>
+
+    <div id='div_pt6.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.10: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError5: 新密码格式不正确  6-18 特殊符号</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.11')" >
+        pass</a>
+
+    <div id='div_pt6.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.11: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordFormatError6: 新密码格式不正确  6-18 含中文</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.12')" >
+        pass</a>
+
+    <div id='div_pt6.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.12: {'message': '10405', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PasswordNULL: 新密码为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.13')" >
+        pass</a>
+
+    <div id='div_pt6.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.13: {'message': '10006', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_PassworkEqual: 新密码和旧密码相同</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.14')" >
+        pass</a>
+
+    <div id='div_pt6.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.14: {'message': '10202', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_SUCCESS1: 更改成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.15')" >
+        pass</a>
+
+    <div id='div_pt6.15' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.15: FA62D8E9F3406614263B70355CA5BF45
+{'message': '10000', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_SUCCESS2: 更改成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.16')" >
+        pass</a>
+
+    <div id='div_pt6.16' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.16').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.16: {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': 'C191938401C86C29006A00B70C4394BA', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}
+C191938401C86C29006A00B70C4394BA
+{'message': '10000', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_TokenError: token 错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.17')" >
+        pass</a>
+
+    <div id='div_pt6.17' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.17').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.17: {'message': '10005', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt6.18' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modifyPassword_TokenNULL: token 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.18')" >
+        pass</a>
+
+    <div id='div_pt6.18' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.18').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.18: {'message': '10003', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>test58_uploadUserHeadIconBinary_test.uploadUserHeadIconBinarytest: 上传用户头像</td>
+    <td>7</td>
+    <td>1</td>
+    <td>4</td>
+    <td>2</td>
+    <td><a href="javascript:showClassDetail('c7',7)">Detail</a></td>
+</tr>
+
+<tr id='ft7.1' class='none'>
+    <td class='failCase'><div class='testcase'>test1_login: 先登录 获取token</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.1')" >
+        fail</a>
+
+    <div id='div_ft7.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.1: {'message': '10203', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test58_uploadUserHeadIconBinary_test.py", line 25, in test1_login
+    self.assertEqual(self.result["message"],"10000")
+AssertionError: '10203' != '10000'
+- 10203
++ 10000
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft7.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_uploadUserHeadIconBinary_SUCCESS1: png  成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.2')" >
+        fail</a>
+
+    <div id='div_ft7.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.2: {'message': '10003', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test58_uploadUserHeadIconBinary_test.py", line 39, in test_uploadUserHeadIconBinary_SUCCESS1
+    self.assertEqual(self.result["message"],"10000")
+AssertionError: '10003' != '10000'
+- 10003
+?     ^
++ 10000
+?     ^
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft7.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_uploadUserHeadIconBinary_SUCCESS2: jpg 成功(这个有问题，返回还是png 格式的)</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.3')" >
+        fail</a>
+
+    <div id='div_ft7.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.3: {'message': '10003', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test58_uploadUserHeadIconBinary_test.py", line 65, in test_uploadUserHeadIconBinary_SUCCESS2
+    self.assertEqual(self.result["message"],"10001")
+AssertionError: '10003' != '10001'
+- 10003
+?     ^
++ 10001
+?     ^
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft7.4' class='none'>
+    <td class='failCase'><div class='testcase'>test_uploadUserHeadIconBinary_SUCCESS3: png  成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.4')" >
+        fail</a>
+
+    <div id='div_ft7.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.4: {'message': '10003', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test58_uploadUserHeadIconBinary_test.py", line 52, in test_uploadUserHeadIconBinary_SUCCESS3
+    self.assertEqual(self.result["message"],"10000")
+AssertionError: '10003' != '10000'
+- 10003
+?     ^
++ 10000
+?     ^
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft7.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_uploadUserHeadIconBinary_tokenERROR1: token 错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.5')" >
+        error</a>
+
+    <div id='div_ft7.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.5: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test58_uploadUserHeadIconBinary_test.py", line 72, in test_uploadUserHeadIconBinary_tokenERROR1
+    token = uploadUserHeadIconBinarytest.token+"w"
+TypeError: can only concatenate list (not "str") to list
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft7.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_uploadUserHeadIconBinary_tokenERROR1: token 错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.6')" >
+        error</a>
+
+    <div id='div_ft7.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.6: Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\driver\myunit.py", line 15, in tearDown
+    print(self.result)
+AttributeError: 'uploadUserHeadIconBinarytest' object has no attribute 'result'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt7.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_uploadUserHeadIconBinary_tokenERROR2: token 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.7')" >
+        pass</a>
+
+    <div id='div_pt7.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.7: {'message': '10003', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test5_completeUserinfo_test.completeUserInfotest: 客户主动修改密码 </td>
+    <td>7</td>
+    <td>7</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c8',7)">Detail</a></td>
+</tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test1_login: 先登录 获取token</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.1')" >
+        pass</a>
+
+    <div id='div_pt8.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.1: 9716452153FBE74A5EFD455890851ECC
+{'message': '10000', 'status': 'success', 'data': {'headIcon': 'https://ycob.oss-us-west-1.aliyuncs.com/20180131/172413169-FD9FCAB23B764DB69AD785944A46277F.png', 'token': '9716452153FBE74A5EFD455890851ECC', 'nickname': 'tt', 'province': '', 'userid': 16086, 'gender': '1', 'grade': 0, 'lastname': 'tt', 'firstname': 'tt', 'city': '', 'country': ''}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_SUCCESS1: 更改成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.2')" >
+        pass</a>
+
+    <div id='div_pt8.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.2: 9716452153FBE74A5EFD455890851ECC
+{'message': '10000', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_firstnameNULL: 姓氏为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.3')" >
+        pass</a>
+
+    <div id='div_pt8.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.3: {'message': '10503', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_lastnameNULL: 姓氏为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.4')" >
+        pass</a>
+
+    <div id='div_pt8.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.4: {'message': '10502', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_nicknameNULL: 昵称为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.5')" >
+        pass</a>
+
+    <div id='div_pt8.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.5: {'message': '10501', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_takenERROR: token 错误</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.6')" >
+        pass</a>
+
+    <div id='div_pt8.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.6: {'message': '10005', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt8.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_completeUserInfo_tokenNULL: token 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.7')" >
+        pass</a>
+
+    <div id='div_pt8.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.7: {'message': '10003', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>test6_checkAppVersion_test.checkAppVersiontest: 检测App版本是否需要更新</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c9',3)">Detail</a></td>
+</tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_checkAppVersion_SUCCESS: 检测成功  有可用版本" 只是检测是否有版本并</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.1')" >
+        pass</a>
+
+    <div id='div_pt9.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.1: {'message': '10000', 'status': 'success', 'data': {'version': {'appName': '1', 'id': 3, 'platform': 1, 'releaseDate': '2017-08-10 10:10:51.0', 'versionName': '1', 'updateInfo': 'adsadasdasd', 'version': '1.1.3'}}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_checkAppVersion_appversionNULL: 版本 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.2')" >
+        pass</a>
+
+    <div id='div_pt9.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.2: {'message': '10603', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_checkAppVersion_platformNULL: platform 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.3')" >
+        pass</a>
+
+    <div id='div_pt9.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.3: {'message': '10602', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='failClass'>
+    <td>test7_helpManual_test.helpManualtest: 获取产品使用手册</td>
+    <td>11</td>
+    <td>10</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c10',11)">Detail</a></td>
+</tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_NOfile1: 页数太大导致 ， 没有此文档</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.1')" >
+        pass</a>
+
+    <div id='div_pt10.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.1: {'message': '10706', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_NOfile2: 没有 productName 导致 ， 没有此文档</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.2')" >
+        pass</a>
+
+    <div id='div_pt10.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.2: {'message': '10009', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft10.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_helpManual_Video_NOfile3: 没有 language 导致 ， 没有此文档</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft10.3')" >
+        fail</a>
+
+    <div id='div_ft10.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft10.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft10.3: {'message': '10000', 'status': 'success', 'data': {'helpList': [{'fileSize': 169848992.0, 'updatedAt': '2018-01-30 16:19:11', 'Name': 'YUNEEC台风Q500介绍篇英文版', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180130/162939561/111.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:20:02', 'Name': 'Yuneec Typhoon H', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084117977/5.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:20:16', 'Name': 'Breeze by Yuneec', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084048084/1.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 0, 'updatedAt': '2018-01-30 16:20:31', 'Name': 'Yuneec Typhoon ', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180130/162939561/111.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 0, 'updatedAt': '2018-01-30 16:21:29', 'Name': 'Yuneec Typhoon H480', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084054377/2.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}]}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test7_helpManual_test.py", line 122, in test_helpManual_Video_NOfile3
+    self.assertEqual(self.result["message"], "10009")
+AssertionError: '10000' != '10009'
+- 10000
+?     ^
++ 10009
+?     ^
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_Success1: VIDEO  中文 获取成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.4')" >
+        pass</a>
+
+    <div id='div_pt10.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.4: {'message': '10000', 'status': 'success', 'data': {'helpList': [{'fileSize': 0, 'updatedAt': '2017-11-30 17:51:14', 'Name': 'YUNEEC台风Q500介绍篇中文版20', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084054377/2.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171016/110843561-5CC.mp4', 'language': 'zh-cn', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:17:36', 'Name': 'YUNEEC台风Q500介绍篇', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084100366/3.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171016/110843561-5CC.mp4', 'language': 'zh-cn', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 211316992.0, 'updatedAt': '2018-01-30 16:17:51', 'Name': 'Yuneec Typhoon H(YouTube)', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180130/162939561/111.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171013/100809909/台风H_切换单控模式与双控模式_CN.mp4', 'language': 'zh-cn', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:18:05', 'Name': '测试视频（优酷）', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084117977/5.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171016/110843561-5CC.mp4', 'language': 'zh-cn', 'productName': 'Firebird, firebird fpv, Breeze'}]}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_Success2: pdf  英文 获取成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.5')" >
+        pass</a>
+
+    <div id='div_pt10.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.5: {'message': '10000', 'status': 'success', 'data': {'helpList': [{'fileSize': 3266990, 'updatedAt': '2017-11-01 09:30:41', 'Name': 'Firebird FPV Quick Start Guide V1.0\xa0', 'fileType': 'pdf', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180102/101507334/火鸟-快速入门指南-306x414px.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171226/102844263-7C45F5A533844E6B8B9853005CC7D980.pdf', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 3266990, 'updatedAt': '2017-11-24 15:28:29', 'Name': 'Firebird FPV User Manual V1.0\xa0', 'fileType': 'pdf', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180102/101515961/火鸟-免责声明-306x414px.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180226/101633786-6C767BB4D0A04D1EAB52CB020F59C238.pdf', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 142088, 'updatedAt': '2017-11-24 15:35:28', 'Name': 'Firebird FPV Disclaimer and Safety Precautions V1.0\xa0', 'fileType': 'pdf', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180102/101515961/火鸟-免责声明-306x414px.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180102/083433643-956202B28E1E414AA3779952AFA53336.pdf', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}]}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_Success3: productName language 为空  获取成功</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.6')" >
+        pass</a>
+
+    <div id='div_pt10.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.6: {'message': '10000', 'status': 'success', 'data': {'helpList': [{'fileSize': 169848992.0, 'updatedAt': '2018-01-30 16:19:11', 'Name': 'YUNEEC台风Q500介绍篇英文版', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180130/162939561/111.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:20:02', 'Name': 'Yuneec Typhoon H', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084117977/5.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 111287000.0, 'updatedAt': '2018-01-30 16:20:16', 'Name': 'Breeze by Yuneec', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084048084/1.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 0, 'updatedAt': '2018-01-30 16:20:31', 'Name': 'Yuneec Typhoon ', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20180130/162939561/111.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}, {'fileSize': 0, 'updatedAt': '2018-01-30 16:21:29', 'Name': 'Yuneec Typhoon H480', 'fileType': 'video', 'imageUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171101/084054377/2.png', 'docUrl': 'https://ycob.oss-us-west-1.aliyuncs.com/20171017/093629930/TYPHOON Wizard_Calibration_SubEN.mp4', 'language': 'en-us', 'productName': 'Firebird, firebird fpv, Breeze'}]}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_filetypeERROR1: filetype 为空</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.7')" >
+        pass</a>
+
+    <div id='div_pt10.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.7: {'message': '10702', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_filetypeERROR2: 有问题 filetype 格式错误 ，返回找不到文件</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.8')" >
+        pass</a>
+
+    <div id='div_pt10.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.8: {'message': '10009', 'status': 'success', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_pageERROR1: pageNo < 0</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.9')" >
+        pass</a>
+
+    <div id='div_pt10.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.9: {'message': '10707', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_pageERROR2: pageNo = 0</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.10')" >
+        pass</a>
+
+    <div id='div_pt10.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.10: {'message': '10707', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt10.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_helpManual_Video_pageERROR3: pageNo 为不规则字符</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.11')" >
+        pass</a>
+
+    <div id='div_pt10.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt10.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt10.11: {'message': '10707', 'status': 'error', 'data': {}}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='failClass'>
+    <td>test8_resetPassword_test.resetPasswordtest: 用户忘记密码是凭邮箱中的验证码重置密码</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c11',1)">Detail</a></td>
+</tr>
+
+<tr id='ft11.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_resetPassword_SetVercodeSUCCESS</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft11.1')" >
+        fail</a>
+
+    <div id='div_ft11.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft11.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft11.1: {'message': '10804', 'status': 'error', 'data': {}}
+Traceback (most recent call last):
+  File "E:\python_lianxi\webinterface\YNCtestinterface\interface\test8_resetPassword_test.py", line 20, in test_resetPassword_SetVercodeSUCCESS
+    self.assertEqual(self.result["message"],"10000")
+AssertionError: '10804' != '10000'
+- 10804
++ 10000
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>88</td>
+    <td class="text text-success">61</td>
+    <td class="text text-danger">9</td>
+    <td class="text text-warning">18</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>

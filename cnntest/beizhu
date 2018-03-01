@@ -1,0 +1,8 @@
+import json
+>>> d = {'s':'you','d':'are'}   #给一个字典
+>>> j = json.dumps(d)
+>>> type(j)
+str   #已经转化为json字符串
+>>> d1 = json.loads(j)
+>>> type(d1)
+dic  #已经将json字符串转化为典了
