@@ -7,7 +7,7 @@ import datetime
 
 newpath ="E:/python_lianxi/webinterface/YNCtestinterface/test_data/"
 
-filename = "test1_login_test.xlsx"
+filename = "test1_login_test_data.xlsx"
 
 os.chdir(newpath)
 retval= os.getcwd()
@@ -28,7 +28,7 @@ xl = xlrd.open_workbook(file)
 # print(xl.sheet_by_index(1))
 
 #三 获取sheet内的汇总数据
-table1 = xl.sheet_by_name("test1")
+table1 = xl.sheet_by_name("test2")
 
 # print(table1.name)
 print(table1.nrows)
@@ -38,7 +38,7 @@ print(table1.nrows)
 
 # print(table1.col_values(0))
 # print(table1.col_values(2))
-# print(table1.col_values(2,1,3))
+print(table1.col_values(2,0,6))
 
 # print(table1.row_values(0))
 # print(table1.row(0))
@@ -54,7 +54,7 @@ print(table1.nrows)
 
 # 取值
 # print(table1.cell(1,2).value)
-# print(table1.cell_value(1,2))
+print(table1.cell_value(1,3))
 # print(table1.row(1)[2].value)
 #
 # #获取类型

@@ -20,10 +20,24 @@ def get_response(url,Methon,**DataALL):
 
     return resp
 
+#获取整个sheeet 信息
 def get_data(testfile,sheetname):
     datainfo = read_execl.XLDatainfo(testfile)
     Data = datainfo.get_sheetinfo_by_name(sheetname)
     return Data
+
+# #获取sheet 某一列信息
+# def get_data_by_columns(testfile,sheetname,column):
+#     datainfo = read_execl.XLDatainfo(testfile)
+#     Data = datainfo.get_sheetinfo_by_name_columns(sheetname,column)
+#     return Data
+#
+# #获取sheet 某一列信息，并转换为二维数组
+#
+# def get_data_by_columns_array(testfile,sheetname,column):
+#     datainfo = read_execl.XLDatainfo(testfile)
+#     Data = datainfo.get_sheetinfo_by_name_by_column(sheetname,column)
+#     return Data
 
 def get_mock_status():
     mock_status = config.mock_open()
