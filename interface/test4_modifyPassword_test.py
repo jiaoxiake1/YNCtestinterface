@@ -97,7 +97,7 @@ class modifyPasswordtest(myunit.MyTest):
         payload = json.dumps(payload)
         r = requests.post(self.base_url, data=payload)
         self.result = r.json()
-        self.assertEqual(self.result["message"], "10203")
+        self.assertEqual(self.result["message"], "10406")
         self.assertEqual(self.result["status"], "error")
 
     def test_modifyPassword_AccountORPasswordError2(self):
@@ -109,7 +109,7 @@ class modifyPasswordtest(myunit.MyTest):
         payload = json.dumps(payload)
         r = requests.post(self.base_url, data=payload)
         self.result = r.json()
-        self.assertEqual(self.result["message"], "10203")
+        self.assertEqual(self.result["message"], "10406")
         self.assertEqual(self.result["status"], "error")
 
     def test_modifyPassword_AccountORPasswordError3(self):
@@ -121,7 +121,7 @@ class modifyPasswordtest(myunit.MyTest):
         payload = json.dumps(payload)
         r = requests.post(self.base_url, data=payload)
         self.result = r.json()
-        self.assertEqual(self.result["message"], "10203")
+        self.assertEqual(self.result["message"], "10406")
         self.assertEqual(self.result["status"], "error")
 
     def test_modifyPassword_AccountORPasswordError4(self):

@@ -1,5 +1,5 @@
 import json
->>> d = {'s':'you','d':'are'}   #给一个字典
+>>> d = {'s':'you','d':'are'}   #给一个字典，json 是""
 >>> j = json.dumps(d)
 >>> type(j)
 str   #已经转化为json字符串

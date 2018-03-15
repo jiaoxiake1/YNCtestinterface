@@ -3,50 +3,49 @@
 import unittest
 import requests
 import json
-from driver import myunit
+from driver import base
+from ddt import ddt,data,unpack
+import os
 
-class findPasswordtest(myunit.MyTest):
+
+
+base_path = os.path.dirname(os.path.dirname(__file__))
+file_path = base_path+"/test_data/"+"test_data.xlsx"
+AllData = base.get_data(file_path,'test3')
+TestData = base.get_data(file_path,'test3')[1:]
+# print(TestData)
+
+
+@ddt
+class findPasswordtest(unittest.TestCase):
+
     """用户忘记密码时，重新申请密码"""
-    base_url = myunit.MyTest.base_url + "findPassword"
 
-    def test_findPassword_sendmailSuccessful(self):
-
-        """发用验证码邮件成功"""
-        payload = {"username":"nn.chen@yuneec.com"}
-        payload=json.dumps(payload)
-        r = requests.post(self.base_url,data=payload)
-        self.result = r.json()
-        self.assertEqual(self.result['status'],"success")
-        self.assertEqual(self.result['message'],'10000')
-
-    def test_findPassword_AccountNULL(self):
-        """用户名为空"""
-        payload = {"username": ""}
-        payload = json.dumps(payload)
-        r = requests.post(self.base_url,data=payload)
-        self.result = r.json()
-        self.assertEqual(self.result['status'],'error')
-        self.assertEqual(self.result['message'],'10002')
-
-    def test_findPassword_AccountNotExist(self):
-        """用户名不存在"""
-        payload = {"username": "11111111@yuneec.com"}
-        payload = json.dumps(payload)
-        r = requests.post(self.base_url,data=payload)
-        self.result = r.json()
-        self.assertEqual(self.result['status'],'error')
-        self.assertEqual(self.result['message'],'10007')
-
-    # def test_findPassword_sendEmailFail(self):
-    #     """邮件发送失败   ? 无法判断邮件发送失败"""
-    #     payload = {"username": "vv@yuneec.com"}
-    #     payload = json.dumps(payload)
-    #     r = requests.post(self.base_url, data=payload)
-    #     self.result = r.json()
-    #     self.assertEqual(self.result['status'], 'error')
-    #     self.assertEqual(self.result['message'], '10301')
+    def setUp(self):
+        endpoint = "findPassword"
+        # self.base_url = "http://139.196.43.67:8080/login"
+        self.url = base.get_url(endpoint)
 
 
+    def tearDown(self):
+        print(self.result)
+
+    @data(*TestData)
+    @unpack
+    def test_findPassword_sendmailSuccessful(self,*TestData):
+        """找回密码"""
+
+        print(TestData)
+        DataAll = eval(str(TestData[0]))
+        # print(DataAll)
+        ExceptResult = eval(str(TestData[1]))
+        # print(ExceptResult)
+
+        methon = "post"
+        resp = base.get_response(self.url, methon, **DataAll)
+        self.result = resp
+        self.assertEqual(self.result['message'], ExceptResult['code'])
+        self.assertEqual(self.result['status'], ExceptResult['status'])
 
 if __name__ == "__main__":
     unittest.main()

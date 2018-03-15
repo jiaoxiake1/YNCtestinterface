@@ -75,4 +75,3 @@ if __name__ == "__main__":
     # alldata2 = datainfo.get_sheetinfo_by_name_by_column('test1',0)
     # print(alldata)
     # print(alldata_column)
-    print(alldata2)
