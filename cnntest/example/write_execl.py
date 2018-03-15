@@ -3,7 +3,8 @@
 import xlsxwriter
 
 # 创建excel 和sheet
-workbook = xlsxwriter.Workbook(r"E:\python_lianxi\webinterface\YNCtestinterface\test_data\test_data.xlsx")
+# workbook = xlsxwriter.Workbook(r"E:\python_lianxi\webinterface\YNCtestinterface\test_data\test_data1.xlsx")
+workbook = xlsxwriter.Workbook()
 worksheet = workbook.add_worksheet('test6')
 # 特定单元格写入
 #
