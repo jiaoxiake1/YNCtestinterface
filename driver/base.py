@@ -43,6 +43,15 @@ def get_mock_status():
     mock_status = config.mock_open()
     return mock_status
 
+#将数据装进数组
+
+def insertArray(strs):
+    insertArr = []
+    for i in range(0,3):
+        insertArr.append(strs)
+    return insertArr
+
+
 
 if __name__ =="__main__":
     print()

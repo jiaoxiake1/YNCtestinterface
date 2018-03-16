@@ -2,6 +2,7 @@
 import xlrd
 from xlutils.copy import copy
 import os
+import random,string
 
 class XLDataInsert(object):
 
@@ -27,12 +28,19 @@ class XLDataInsert(object):
     def insertData(self):
 
         for i in range(0,self.cols):
+
             if i == 2:
-                self.sheet.write(self.rows,i,self.description)
+
+                self.sheet.write(self.rows,i,self.description[i])
             elif i == 0:
-                self.sheet.write(self.rows, i, "i == 0")
+                self.sheet.write(self.rows, i, self.description[i])
             elif i == 1:
-                self.sheet.write(self.rows, i, "i == 1")
+                self.sheet.write(self.rows, i, self.description[i])
+
+
+
+
+
 
 
 
@@ -76,5 +84,16 @@ if __name__ == "__main__":
     filepath = os.getcwd()+"\\test_data1.xls"
     print(filepath)
     # filepath = r'E:\python_lianxi\webinterface\YNCtestinterface\test_data\test_data1.xls'
-    description = "hello description!!"
-    datainfo = XLDataInsert(filepath,description).insertData_by_sheetname("test1")
+    # description = "hello description!!"
+    username = ''.join(random.sample(string.ascii_letters + string.digits, 8))
+    username = username + "@yuneec.com"
+    username_json = {"json": {"username": username, "password": "a1234567890"}}
+    exceptResult_json = {"code": "10000", "status": "success"}
+    discription = "申请用户名成功"
+    # insertArr = {"username_json":username_json,"exceptResult_json":exceptResult_json,"discription":discription}
+    insertArr = [username_json, exceptResult_json, discription]
+    print(insertArr)
+    print(type(insertArr))
+    print(type(insertArr[0]))
+    print(insertArr[0])
+    datainfo = XLDataInsert(filepath,insertArr).insertData_by_sheetname("test1")
