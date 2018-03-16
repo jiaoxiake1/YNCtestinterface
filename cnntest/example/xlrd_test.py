@@ -7,7 +7,7 @@ import datetime
 
 newpath ="E:/python_lianxi/webinterface/YNCtestinterface/test_data/"
 
-filename = "test1_login_test_data.xlsx"
+filename = "test_data1.xlsx"
 
 os.chdir(newpath)
 retval= os.getcwd()
