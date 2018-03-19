@@ -12,29 +12,29 @@ class XLDataInsert(object):
         self.x1 = xlrd.open_workbook(path,formatting_info=True,)# formatting_info copy 后保存原来的execl 格式
 
 
-    def insertData_by_sheetname(self,sheetname):
+    def insertData_by_sheetname(self,sheetname,row):
         self.sheet_old = self.x1.sheet_by_name(sheetname)
-        self.rows = self.sheet_old.nrows
-        print(self.rows)
+        # self.rows = self.sheet_old.nrows
+        # print(self.rows)
         self.cols = self.sheet_old.ncols
-        print(self.cols)
+        # print(self.cols)
         self.new_xl = copy(self.x1)
         self.sheet = self.new_xl.get_sheet(sheetname)
         self.rows = self.sheet_old.nrows
-        self.insertData()
+        self.insertData(row)
 
         self.new_xl.save(self.path)
 
-    def insertData(self):
+    def insertData(self,row):
 
         for i in range(0,self.cols):
 
             if i == 0:
-                self.sheet.write(self.rows,i,self.insert_text[i])
+                self.sheet.write(row,i,self.insert_text[i])
             elif i == 1:
-                self.sheet.write(self.rows, i, self.insert_text[i])
+                self.sheet.write(row, i, self.insert_text[i])
             elif i == 2:
-                self.sheet.write(self.rows, i, self.insert_text[i])
+                self.sheet.write(row, i, self.insert_text[i])
 
 
 
