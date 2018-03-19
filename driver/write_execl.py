@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-import xlrd
+import xlrd,xlwt
 from xlutils.copy import copy
 import os
 import random,string
 
 class XLDataInsert(object):
 
-    def __init__(self,path,description):
+    def __init__(self,path,insert_text):
         self.path = path
-        self.description = description
-        self.x1 = xlrd.open_workbook(path)
+        self.insert_text = insert_text
+        self.x1 = xlrd.open_workbook(path,formatting_info=True,)# formatting_info copy 后保存原来的execl 格式
 
 
     def insertData_by_sheetname(self,sheetname):
@@ -29,27 +29,12 @@ class XLDataInsert(object):
 
         for i in range(0,self.cols):
 
-            if i == 2:
-
-                self.sheet.write(self.rows,i,self.description[i])
-            elif i == 0:
-                self.sheet.write(self.rows, i, self.description[i])
+            if i == 0:
+                self.sheet.write(self.rows,i,self.insert_text[i])
             elif i == 1:
-                self.sheet.write(self.rows, i, self.description[i])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                self.sheet.write(self.rows, i, self.insert_text[i])
+            elif i == 2:
+                self.sheet.write(self.rows, i, self.insert_text[i])
 
 
 
@@ -87,8 +72,9 @@ if __name__ == "__main__":
     # description = "hello description!!"
     username = ''.join(random.sample(string.ascii_letters + string.digits, 8))
     username = username + "@yuneec.com"
-    username_json = {"json": {"username": username, "password": "a1234567890"}}
-    exceptResult_json = {"code": "10000", "status": "success"}
+    username_json = str({"json": {"username": username, "password": "a1234567890"}})
+
+    exceptResult_json = str({"code": "10000", "status": "success"})
     discription = "申请用户名成功"
     # insertArr = {"username_json":username_json,"exceptResult_json":exceptResult_json,"discription":discription}
     insertArr = [username_json, exceptResult_json, discription]
