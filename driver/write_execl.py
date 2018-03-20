@@ -20,11 +20,32 @@ class XLDataInsert(object):
         # print(self.cols)
         self.new_xl = copy(self.x1)
         self.sheet = self.new_xl.get_sheet(sheetname)
-        self.rows = self.sheet_old.nrows
+        # self.cols = self.sheet.ncols
+        # self.rows = self.sheet_old.nrows
         self.insertData(row)
 
         self.new_xl.save(self.path)
 
+    # #写入连续的几行
+    # def insertDataLines(self,rows):
+    #
+    #     for row in range(1,rows):
+    #         col = 0
+    #         while(col<3):
+    #             if col == 0:
+    #                 self.sheet.write(row, col, self.insert_text[col])
+    #             elif col == 1:
+    #                 self.sheet.write(row, col, self.insert_text[col])
+    #             elif col == 2:
+    #                 self.sheet.write(row, col, self.insert_text[col])
+    #             else:
+    #                 break
+
+
+
+
+
+    #写入固定一行
     def insertData(self,row):
 
         for i in range(0,self.cols):
@@ -82,4 +103,4 @@ if __name__ == "__main__":
     print(type(insertArr))
     print(type(insertArr[0]))
     print(insertArr[0])
-    datainfo = XLDataInsert(filepath,insertArr).insertData_by_sheetname("test1")
+    datainfo = XLDataInsert(filepath,insertArr).insertData_by_sheetname("test1",13)

@@ -7,21 +7,13 @@ import os
 
 base_path = os.path.dirname(os.path.dirname(__file__))
 # print(base_path)
-# base_path = base_path.replace('\\','/')
-file_path = base_path+"/test_data/"+"test_data.xlsx"
-# print(file_path)
-
-# print(type(file_path))
-# filepath = r'E:\python_lianxi\webinterface\YNCtestinterface\test_data\test1_login_test_data.xlsx'
+base_path = base_path.replace('\\','/')
+file_path = base_path+"/test_data/"+"test_data.xls"
 AllData = base.get_data(file_path,'test1')
 
 TestData = base.get_data(file_path,'test1')[1:]
 print(TestData[0])
-# TestData_by_column = base.get_data_by_columns(file_path,'test1',0)
-# TestData_by_column = base.get_data_by_columns_array(file_path,'test1',0)
-# print(TestData_by_column)
-# TestData_by_column_ExceptResult = base.get_data_by_columns_array(file_path,'test1',1)
-# print(TestData_by_column_ExceptResult)
+
 
 
 @ddt

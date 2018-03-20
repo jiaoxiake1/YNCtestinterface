@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-from driver import config,HttpServer,read_execl
+from driver import config,HttpServer,read_execl,write_execl
+import json
+import requests
 
 
 
@@ -20,11 +22,31 @@ def get_response(url,Methon,**DataALL):
 
     return resp
 
-#获取整个sheeet 信息
+#获取整个sheet 信息
 def get_data(testfile,sheetname):
     datainfo = read_execl.XLDatainfo(testfile)
     Data = datainfo.get_sheetinfo_by_name(sheetname)
     return Data
+
+# insert data
+
+
+#获取token
+
+def login_token():
+
+    url = "http://139.196.43.67:8080/login"
+    payload = {"username":"nn.chen@yuneec.com","password":"a1234567890"}
+    payload = json.dumps(payload)
+    r = requests.post(url,data=payload)
+    result = r.json()
+    # print(result)
+    print((result["data"])["token"])
+    # return ((result["data"])["token"])
+
+
+
+
 
 # #获取sheet 某一列信息
 # def get_data_by_columns(testfile,sheetname,column):
@@ -39,19 +61,19 @@ def get_data(testfile,sheetname):
 #     Data = datainfo.get_sheetinfo_by_name_by_column(sheetname,column)
 #     return Data
 
-def get_mock_status():
-    mock_status = config.mock_open()
-    return mock_status
+# def get_mock_status():
+#     mock_status = config.mock_open()
+#     return mock_status
 
 #将数据装进数组
 
-def insertArray(strs):
-    insertArr = []
-    for i in range(0,3):
-        insertArr.append(strs)
-    return insertArr
+# def insertArray(strs):
+#     insertArr = []
+#     for i in range(0,3):
+#         insertArr.append(strs)
+#     return insertArr
 
 
 
 if __name__ =="__main__":
-    print()
+    login_token()

@@ -10,7 +10,8 @@ import os
 
 
 base_path = os.path.dirname(os.path.dirname(__file__))
-file_path = base_path+"/test_data/"+"test_data.xlsx"
+base_path = base_path.replace('\\','/')
+file_path = base_path+"/test_data/"+"test_data.xls"
 AllData = base.get_data(file_path,'test3')
 TestData = base.get_data(file_path,'test3')[1:]
 # print(TestData)
@@ -37,9 +38,9 @@ class findPasswordtest(unittest.TestCase):
 
         print(TestData)
         DataAll = eval(str(TestData[0]))
-        # print(DataAll)
+        print(DataAll)
         ExceptResult = eval(str(TestData[1]))
-        # print(ExceptResult)
+        print(ExceptResult)
 
         methon = "post"
         resp = base.get_response(self.url, methon, **DataAll)
