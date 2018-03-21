@@ -33,7 +33,7 @@ class findPasswordtest(unittest.TestCase):
 
     @data(*TestData)
     @unpack
-    def test_findPassword_sendmailSuccessful(self,*TestData):
+    def test_findPassword_sendmail(self,*TestData):
         """找回密码"""
 
         print(TestData)
