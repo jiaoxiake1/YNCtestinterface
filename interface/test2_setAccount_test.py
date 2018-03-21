@@ -18,7 +18,8 @@ username_json=str({"json":{"username":username,"password":"a1234567890"}})
 exceptResult_json = str({"code":"10000","status":"success"})
 discription = "申请用户名成功"
 insertArr = [username_json,exceptResult_json,discription]
-datainfo = write_execl.XLDataInsert(file_path,insertArr).insertData_by_sheetname("test2",13)
+# datainfo = write_execl.XLDataInsert(file_path,insertArr).insertData_by_sheetname("test2",13)
+datainfo = base.insert_data_one_line(file_path,insertArr,"test2",13)
 #
 # # print(file_path)
 AllData = base.get_data(file_path,'test2')

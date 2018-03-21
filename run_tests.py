@@ -60,7 +60,7 @@ def send_mail(file_new):
 def new_report(testreport):
     lists = os.listdir(testreport)
     print(lists)
-    lists.sort(key = lambda fn:os.path.getmtime(testreport+"\\"+fn))# fn 是临时定义的变量，一次从lists 中取值符给 fn ;
+    lists.sort(key = lambda fn:os.path.getmtime(testreport+"\\"+fn))# fn 是临时定义的变量，一次从lists 中取值赋值给 fn ;
                                                                     # os.path.getmtime(testreport+"\\"+fn) 获取每个文件的时间
                                                                     # lists.sort 按照时间从小到大给lists 排序
 

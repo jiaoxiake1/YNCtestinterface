@@ -3,6 +3,7 @@ import xlrd,xlwt
 from xlutils.copy import copy
 import os
 import random,string
+from driver import base
 
 class XLDataInsert(object):
 
@@ -26,24 +27,6 @@ class XLDataInsert(object):
 
         self.new_xl.save(self.path)
 
-    # #写入连续的几行
-    # def insertDataLines(self,rows):
-    #
-    #     for row in range(1,rows):
-    #         col = 0
-    #         while(col<3):
-    #             if col == 0:
-    #                 self.sheet.write(row, col, self.insert_text[col])
-    #             elif col == 1:
-    #                 self.sheet.write(row, col, self.insert_text[col])
-    #             elif col == 2:
-    #                 self.sheet.write(row, col, self.insert_text[col])
-    #             else:
-    #                 break
-
-
-
-
 
     #写入固定一行
     def insertData(self,row):
@@ -56,6 +39,29 @@ class XLDataInsert(object):
                 self.sheet.write(row, i, self.insert_text[i])
             elif i == 2:
                 self.sheet.write(row, i, self.insert_text[i])
+
+    #写入连续行
+
+    def insertData_by_sheetname_lines(self,sheetname):
+        self.new_xl = copy(self.x1)
+        self.sheet = self.new_xl.get_sheet(sheetname)
+        # self.cols = self.sheet.ncols
+        # self.rows = self.sheet_old.nrows
+        self.insertDateSeveralLines(self.insert_text)
+
+        self.new_xl.save(self.path)
+
+
+    def insertDateSeveralLines(self,array):
+        for row in range(len(array)):
+            cols = 0
+            while (cols < 3):
+                self.sheet.write((row + 1), cols, array[row][cols])
+                # print("*" * 100)
+                # print(row, cols)
+                # print(array[row][cols])
+                # print("_" * 100)
+                cols = cols + 1
 
 
 
@@ -97,10 +103,20 @@ if __name__ == "__main__":
 
     exceptResult_json = str({"code": "10000", "status": "success"})
     discription = "申请用户名成功"
+
+
+
+    username_json2 = str({"json": {"username": "hahah", "password": "a1234567890"}})
+
+    exceptResult_json2 = str({"code": "10002", "status": "success"})
+    discription2 = "申请用户名成功2"
     # insertArr = {"username_json":username_json,"exceptResult_json":exceptResult_json,"discription":discription}
-    insertArr = [username_json, exceptResult_json, discription]
-    print(insertArr)
-    print(type(insertArr))
-    print(type(insertArr[0]))
-    print(insertArr[0])
-    datainfo = XLDataInsert(filepath,insertArr).insertData_by_sheetname("test1",13)
+    insertArr = [[username_json, exceptResult_json, discription],[username_json2, exceptResult_json2, discription2]]
+    # print(insertArr)
+    # print(type(insertArr))
+    # print(type(insertArr[0]))
+    # print(insertArr[0])
+    # datainfo = XLDataInsert(filepath,insertArr).insertData_by_sheetname("test1",13)
+    # datainfo = base.insert_data_one_line(filepath,insertArr,"test1",13)
+    # datainf = XLDataInsert(filepath,insertArr).insertData_by_sheetname_lines("test7")
+    datainf = base.insert_data_several_lines(filepath,insertArr,"test7")

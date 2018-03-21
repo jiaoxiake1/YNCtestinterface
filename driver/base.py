@@ -30,8 +30,19 @@ def get_data(testfile,sheetname):
 
 # insert data
 
+def insert_data_one_line(testfile,insert_text,sheetname,row):
+    datainfo = write_execl.XLDataInsert(testfile,insert_text)
+    datainfo.insertData_by_sheetname(sheetname,row)
 
-#获取token
+# insert several lines data
+
+def insert_data_several_lines(testfile,insert_text,sheetname):
+    datainfo = write_execl.XLDataInsert(testfile,insert_text)
+    datainfo.insertData_by_sheetname_lines(sheetname)
+
+
+
+# 获取token
 
 def login_token():
 
@@ -40,9 +51,9 @@ def login_token():
     payload = json.dumps(payload)
     r = requests.post(url,data=payload)
     result = r.json()
-    # print(result)
-    print((result["data"])["token"])
-    # return ((result["data"])["token"])
+    # print(result["data"])
+    # print((result["data"])["token"])
+    return ((result["data"])["token"])
 
 
 
