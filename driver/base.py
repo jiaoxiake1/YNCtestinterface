@@ -52,7 +52,7 @@ def login_token():
     r = requests.post(url,data=payload)
     result = r.json()
     # print(result["data"])
-    # print((result["data"])["token"])
+    # print("base  :"+ (result["data"])["token"])
     return ((result["data"])["token"])
 
 

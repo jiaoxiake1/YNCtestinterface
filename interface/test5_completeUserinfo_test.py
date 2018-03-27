@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 
-import requests
-import json
-from driver import myunit
 import unittest
 from driver import base
 from ddt import ddt,data,unpack
-import random,string
 import os
 
 
@@ -20,6 +16,7 @@ file_path = base_path+"/test_data/"+"test_data.xls"
 
 # 写 inserArr
 token =base.login_token()
+# print("token : "+ token)
 # print(token)
 
 # 1、token错误  2、token 为空  3、nicknames 为空
@@ -49,9 +46,11 @@ inputPara6 = str({"json":{"token":token,"nickname":"kk","lastname":"kk","firstna
 exceptResul6 =str({"code":"10000","status":"success"})
 discription6 = "success"
 
-insertArr = [[inputPara1,exceptResul1,discription1],[inputPara2,exceptResul2,discription2],
+insertArr = [
+            [inputPara1,exceptResul1,discription1],[inputPara2,exceptResul2,discription2],
              [inputPara3, exceptResul3, discription3],[inputPara4,exceptResul4,discription4],
-             [inputPara5, exceptResul5, discription5],[inputPara6,exceptResul6,discription6]]
+             [inputPara5, exceptResul5, discription5],[inputPara6,exceptResul6,discription6]
+]
 
 datainfo = base.insert_data_several_lines(file_path,insertArr,"test5")
 
@@ -69,7 +68,6 @@ class completeUserInfotest(unittest.TestCase):
         endpoint = "completeUserInfo"
         # self.base_url = "http://139.196.43.67:8080/login"
         self.url = base.get_url(endpoint)
-
 
 
     def tearDown(self):
